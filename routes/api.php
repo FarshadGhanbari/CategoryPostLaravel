@@ -2,7 +2,6 @@
 
 use App\Categories;
 use App\Posts;
-use App\Tags;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -46,7 +45,7 @@ Route::get('categories', function () {
 Route::get('posts', function () {
     try {
         // نمایش 10 پست آخر
-        $posts = Posts::latest()->take(10)->get();
+        $posts = Posts::orderBy('id', 'desc')->take(10)->get();
         return response()->json([
             'data' => $posts,
             'status' => true
